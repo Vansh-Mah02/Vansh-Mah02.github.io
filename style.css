@@ -220,9 +220,10 @@ option{
 
 /* ICON */
 .icon{
-    position:absolute;
+    position: absolute;
     right:25px;
     font-size:3rem;
+    
 }
 
 /* -------- FAQ -------- */
@@ -269,6 +270,7 @@ details[open] summary::after{
 }
 .ready{
     margin-top: 50px;
+    text-align: center;
 }
 .em-btn{
     margin-top: 10px;
@@ -282,6 +284,7 @@ details[open] summary::after{
 }
 .GS-btn{
     margin-left: 5px;
+    margin-bottom: 30px;
     padding:15px 25px;
     background:red;
     border:none;
@@ -331,18 +334,16 @@ footer p a{
     cursor: pointer;
 }
 /* -------- RESPONSIVE -------- */
-@media (max-width:1024px){
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-        
-    }
-}
 @media only screen and (max-width:768px){
     header{
         padding:15px;
     }
     .hero-content h1{
         font-size:2rem;
+    }
+    .hero-content p{
+        font-size:0.95rem;
+        
     }
     .cards{
         grid-template-columns:repeat(1,1fr);
@@ -351,6 +352,7 @@ footer p a{
         min-height: 180px;
     }
     footer {
+        grid-template-columns: 1fr;
         gap: 25px;
         padding: 20px;
     }
@@ -364,5 +366,47 @@ footer p a{
     .again input{
         width: 400px;
     }
-
+    .email-box input{
+    width:300px;
+    height: 50px;
+    margin: auto;
+    }
+    .email-box button{
+    height: 50px;
+    width: 150px;
+    margin: auto;
+    }
+    .email-box{
+        display: flex;
+        flex-direction: column;
+    }
+    .TN{
+    font-size: 30px;
+    padding-left: 60px;
+    padding-bottom: 10px;
+    }
+    .ready{
+        padding-left: 15px;
+        text-align: left;
+    }
+    .em-btn{
+        margin: 10px 20px;
+        padding:15px;
+    }
+    .GS-btn{
+        margin-right: 220px;
+    }
+    .cards{
+        height: 900px;
+    }
+    .HF{
+    font-size: 25px;
+    white-space: nowrap;
+    padding-left: 0px;
+    }
+    .faq{
+    padding: 10px;
+    width: 100%;
+    }
 }
+
