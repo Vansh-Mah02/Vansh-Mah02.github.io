@@ -370,11 +370,6 @@ footer a {
   .card {
     min-height: 180px;
   }
-  footer {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 20px;
-  }
   .footer-1,
   .footer-2,
   .footer-3,
