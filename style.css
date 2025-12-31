@@ -29,8 +29,7 @@ header img {
   display: flex;
   gap: 15px;
 }
-select,
-.trans-btn {
+select,.trans-btn {
   height: 32px;
   width: 110px;
   display: flex;
@@ -72,7 +71,7 @@ option {
   justify-content: center;
 }
 .btn:hover {
-  background-color: #da0707;
+  background-color: #ba0505;
 }
 
 /* -------- HERO SECTION -------- */
@@ -122,7 +121,7 @@ option {
   border-radius: 4px;
 }
 .GS:hover {
-  background-color: #da0707;
+  background-color: #ba0505;
 }
 /* ----------Curve----------*/
 .curve {
@@ -261,7 +260,8 @@ summary::after {
   font-size: 2rem;
 }
 details[open] summary::after {
-  content: "x";
+  transform: rotate(45deg);
+  content: "";
 }
 .answer {
   border-top: 2px solid #000000;
@@ -299,7 +299,7 @@ details[open] summary::after {
   border-radius: 4px;
 }
 .GS-btn:hover {
-  background-color: #da0707;
+  background-color: #ba0505;
 }
 /* -------- FOOTER -------- */
 .call {
@@ -349,6 +349,12 @@ footer a {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     padding: 20px;
+  }
+  summary{
+    font-size: 1.2rem;
+  }
+  .answer {
+  font-size: 1.2rem;
   }
 }
 @media (max-width: 768px) {
