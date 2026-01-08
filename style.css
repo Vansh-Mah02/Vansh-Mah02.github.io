@@ -260,8 +260,9 @@ summary::after {
   font-size: 2rem;
 }
 details[open] summary::after {
+  transition-duration: 0s;
   transform: rotate(45deg);
-  content: "";
+  content: "+";
 }
 .answer {
   border-top: 2px solid #000000;
