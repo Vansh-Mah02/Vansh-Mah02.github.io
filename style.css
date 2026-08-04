@@ -288,16 +288,17 @@ details[open] summary::after {
   background-color: rgba(0, 0, 0, 0.5);
   color: #ffffff;
 }
-.GS-btn {
+.GS-btn{
   margin-left: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 220px;
   padding: 15px 25px;
   background: red;
   border: none;
   color: white;
-  font-size: 1rem;
+  font-size: 1.3rem;
   cursor: pointer;
   border-radius: 4px;
+  font-weight: bolder;
 }
 .GS-btn:hover {
   background-color: #ba0505;
