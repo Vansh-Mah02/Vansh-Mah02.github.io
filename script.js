@@ -1,24 +1,7 @@
-/* =====================================================
-   Netflix Clone — script.js
-   Covers:
-   1. Email validation (hero + bottom CTA)
-   2. Sticky / scroll-aware header
-   3. FAQ accordion with smooth animation
-   4. Top-10 row — keyboard / arrow-button navigation
-   5. Language switcher (header + footer)
-   6. Card entrance animations (Intersection Observer)
-   7. Toast notification system
-   8. Scroll-to-top button
-   9. Hero background subtle parallax
-  10. Top-10 item hover ripple effect
-===================================================== */
-
 (function () {
   "use strict";
 
-  /* ─────────────────────────────────────────────────
-     UTILITY HELPERS
-  ───────────────────────────────────────────────── */
+ 
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
@@ -26,9 +9,6 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }
 
-  /* ─────────────────────────────────────────────────
-     1. TOAST NOTIFICATION SYSTEM
-  ───────────────────────────────────────────────── */
   function createToastContainer() {
     const existing = $("#toast-container");
     if (existing) return existing;
@@ -82,7 +62,6 @@
     toast.innerHTML = `<span style="font-size:1.1rem;font-weight:700">${icon}</span><span>${message}</span>`;
     container.appendChild(toast);
 
-    // Animate in
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         toast.style.opacity = "1";
@@ -90,7 +69,7 @@
       });
     });
 
-    // Animate out & remove
+   
     setTimeout(() => {
       toast.style.opacity = "0";
       toast.style.transform = "translateX(40px)";
@@ -98,13 +77,10 @@
     }, duration);
   }
 
-  /* ─────────────────────────────────────────────────
-     2. EMAIL VALIDATION — HERO & BOTTOM CTA
-  ───────────────────────────────────────────────── */
   function addEmailValidation(inputEl, buttonEl) {
     if (!inputEl || !buttonEl) return;
 
-    // Visual error state helper
+    
     function setError(msg) {
       inputEl.style.border = "2px solid #e50914";
       inputEl.style.outline = "none";
@@ -131,7 +107,7 @@
         return;
       }
 
-      // Simulate redirect to sign-up with email pre-filled
+      
       clearError();
       showToast("Redirecting to Netflix sign-up…", "success");
       setTimeout(() => {
@@ -140,28 +116,25 @@
       }, 1200);
     });
 
-    // Also trigger on Enter key
     inputEl.addEventListener("keydown", function (e) {
       if (e.key === "Enter") buttonEl.click();
     });
   }
 
-  // Hero email box
+ 
   const heroInput = $(".email-box input[type='email']");
   const heroBtn = $(".email-box .GS");
   addEmailValidation(heroInput, heroBtn);
 
-  // Bottom CTA email box
+ 
   const ctaInput = $(".em-btn");
   const ctaBtn = $(".GS-btn");
   addEmailValidation(ctaInput, ctaBtn);
 
-  /* ─────────────────────────────────────────────────
-     3. STICKY / SCROLL-AWARE HEADER
-  ───────────────────────────────────────────────── */
+  
   const header = $("header");
   if (header) {
-    // Start transparent over hero; solidify on scroll
+    
     let lastScroll = 0;
 
     function updateHeader() {
@@ -180,7 +153,7 @@
         header.style.position = "absolute";
       }
 
-      // Hide header when scrolling fast downward, show on upward
+      
       if (scrollY > 200) {
         if (scrollY > lastScroll + 8) {
           header.style.transform = "translateY(-100%)";
@@ -196,16 +169,13 @@
       lastScroll = scrollY;
     }
 
-    // Ensure smooth transition from the start
+    
     header.style.transition =
       "background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease";
     window.addEventListener("scroll", updateHeader, { passive: true });
     updateHeader();
   }
 
-  /* ─────────────────────────────────────────────────
-     4. FAQ ACCORDION — smooth animation + one-open
-  ───────────────────────────────────────────────── */
   const allDetails = $$(".faq details");
 
   allDetails.forEach((detail) => {
@@ -213,18 +183,18 @@
     const answer = $(".answer", detail);
     if (!answer) return;
 
-    // Wrap answer content for animation
+    
     answer.style.overflow = "hidden";
     answer.style.transition = "max-height 0.38s ease, padding 0.38s ease";
     answer.style.maxHeight = "0";
     answer.style.padding = "0 22px";
 
-    // Prevent default <details> toggle; handle manually
+    
     summary.addEventListener("click", function (e) {
       e.preventDefault();
       const isOpen = detail.hasAttribute("open");
 
-      // Close all others
+     
       allDetails.forEach((d) => {
         if (d !== detail && d.hasAttribute("open")) {
           const a = $(".answer", d);
@@ -242,21 +212,19 @@
         setTimeout(() => detail.removeAttribute("open"), 380);
       } else {
         detail.setAttribute("open", "");
-        // Measure natural height
+        
         answer.style.maxHeight = answer.scrollHeight + 44 + "px";
         answer.style.padding = "22px";
       }
     });
   });
 
-  /* ─────────────────────────────────────────────────
-     5. TOP-10 ROW — Arrow navigation buttons
-  ───────────────────────────────────────────────── */
+ 
   const top10 = $(".top10");
   if (top10) {
     const section = top10.closest("section") || top10.parentElement;
 
-    // Create left & right arrow buttons
+    
     function createArrow(direction) {
       const btn = document.createElement("button");
       btn.innerHTML = direction === "left" ? "&#8592;" : "&#8594;";
@@ -293,7 +261,7 @@
       return btn;
     }
 
-    // Wrap top10 in a relative container so arrows can be positioned
+    
     const wrapper = document.createElement("div");
     wrapper.style.position = "relative";
     top10.parentNode.insertBefore(wrapper, top10);
@@ -313,7 +281,7 @@
       top10.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
     });
 
-    // Show/hide arrows on hover of the wrapper
+    
     wrapper.addEventListener("mouseenter", () => {
       updateArrowVisibility();
       leftArrow.style.transition = "opacity 0.25s ease, background 0.2s ease";
@@ -335,7 +303,6 @@
     top10.addEventListener("scroll", updateArrowVisibility, { passive: true });
     updateArrowVisibility();
 
-    // ── Touch / drag-to-scroll on desktop ──
     let isDown = false;
     let startX = 0;
     let scrollStart = 0;
@@ -361,9 +328,7 @@
     top10.style.cursor = "grab";
   }
 
-  /* ─────────────────────────────────────────────────
-     6. LANGUAGE SWITCHER (sync header ↔ footer)
-  ───────────────────────────────────────────────── */
+
   const langSelects = $$(".trans-btn select");
 
   const translations = {
@@ -429,7 +394,7 @@
       }
     }
 
-    // Sync all selects
+    
     langSelects.forEach((sel) => (sel.value = lang));
   }
 
@@ -439,9 +404,7 @@
     });
   });
 
-  /* ─────────────────────────────────────────────────
-     7. CARD ENTRANCE ANIMATIONS (Intersection Observer)
-  ───────────────────────────────────────────────── */
+  
   const animatables = $$(".card, .top10-item, .faq details");
 
   animatables.forEach((el, i) => {
@@ -465,9 +428,7 @@
 
   animatables.forEach((el) => observer.observe(el));
 
-  /* ─────────────────────────────────────────────────
-     8. SCROLL-TO-TOP BUTTON
-  ───────────────────────────────────────────────── */
+ 
   const scrollBtn = document.createElement("button");
   scrollBtn.innerHTML = "&#8679;";
   scrollBtn.setAttribute("aria-label", "Scroll to top");
@@ -518,9 +479,7 @@
     { passive: true }
   );
 
-  /* ─────────────────────────────────────────────────
-     9. HERO BACKGROUND SUBTLE PARALLAX
-  ───────────────────────────────────────────────── */
+ 
   const hero = $(".hero");
   if (hero && window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
     window.addEventListener(
@@ -535,9 +494,7 @@
     );
   }
 
-  /* ─────────────────────────────────────────────────
-    10. TOP-10 ITEM — Play-icon overlay on hover
-  ───────────────────────────────────────────────── */
+
   $$(".top10-item").forEach((item) => {
     const overlay = document.createElement("div");
     Object.assign(overlay.style, {
@@ -579,9 +536,7 @@
     });
   });
 
-  /* ─────────────────────────────────────────────────
-    11. COOKIE PREFERENCES MODAL (footer link)
-  ───────────────────────────────────────────────── */
+  
   const cookieLink = $$("footer a").find(
     (a) => a.textContent.trim() === "Cookie Preferences"
   );
@@ -590,7 +545,7 @@
     cookieLink.addEventListener("click", function (e) {
       e.preventDefault();
 
-      // Simple modal
+      
       const overlay = document.createElement("div");
       Object.assign(overlay.style, {
         position: "fixed",
@@ -666,9 +621,7 @@
     });
   }
 
-  /* ─────────────────────────────────────────────────
-    12. HEADER SCROLL-PROGRESS BAR
-  ───────────────────────────────────────────────── */
+  
   const progressBar = document.createElement("div");
   Object.assign(progressBar.style, {
     position: "fixed",
@@ -695,8 +648,6 @@
     { passive: true }
   );
 
-  /* ─────────────────────────────────────────────────
-    DONE — All features initialised
-  ───────────────────────────────────────────────── */
+
   console.log("%cNetflix Clone JS loaded ✓", "color:#e50914;font-weight:700;font-size:14px");
 })();
