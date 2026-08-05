@@ -8,7 +8,7 @@ A responsive front-end clone of the Netflix landing page built to practice moder
 
 The project is inspired by Netflix's official homepage and replicates its modern design, including the hero section, content sections, FAQs, and footer while maintaining a responsive layout across different screen sizes.
 
-**Live Demo:** [Project](https://clone-netflix-chi-three.vercel.app)
+**Live Demo:** [Netflix-clone](clone-netflix-git-main-vansh-maheshwari-s-projects.vercel.app)
 
 ---
 
